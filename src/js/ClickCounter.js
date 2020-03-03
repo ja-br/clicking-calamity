@@ -1,4 +1,8 @@
-let clickCount = 0;
-const countClick = () => {
-    clickCount++
+class ClickCount {
+    constructor() {
+        this.clickCount = 0;
+    }
+    click() {
+        this.clickCount++;
+    }
 }
