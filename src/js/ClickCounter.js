@@ -6,6 +6,7 @@ class ClickCount {
         this.companionCost = 100;
         this.compounderCost = 10;
     }
+
     click() {
         this.clickCount++;
     }
@@ -37,5 +38,13 @@ class ClickCount {
         this.clickCount -= this.compounderCost;
         this.compounderCost += 10;
         this.compounderCount++;
+    }
+
+    getClickCount() {
+        return this.clickCount;
+    }
+    corralClickCompanions() {
+        this.clickCount += this.companionCount;
+
     }
 }

@@ -19,6 +19,7 @@ describe('Clicking Counter Calamity', () => {
             expect(underTest.clickCount).toBe(2);
         });
     });
+
     describe('Clicking Companions', () => {
 
 
@@ -45,8 +46,16 @@ describe('Clicking Counter Calamity', () => {
             expect(underTest.getCompanionCost()).toBe(companionCost);
 
         });
+        it('1 click should be added to clickCount for every companion', () => {
+            underTest.purchaseCompanion();
+            underTest.purchaseCompanion();
+            underTest.corralClickCompanions();
+            let clickCount = underTest.getClickCount();
+            expect(clickCount).toBe(-218);
+        });
 
     });
+
     describe('Culmination Compounder', () => {
 
         it('ClickCounter should begin with 0 compounders', () => {
