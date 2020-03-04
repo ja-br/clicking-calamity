@@ -4,7 +4,8 @@ describe('Clicking Counter Calamity', () => {
         underTest.clickCount = 0;
         underTest.companionCount = 0;
         underTest.compounderCount = 0;
-
+        underTest.companionCost = 100;
+        underTest.compounderCost = 10;
     })
     describe('countClick() records clicks and Clickcounter can give the clickCount', () => {
 
@@ -20,6 +21,7 @@ describe('Clicking Counter Calamity', () => {
     });
     describe('Clicking Companions', () => {
 
+
         it('ClickCounter should begin with 0 companions', () => {
             expect(underTest.getCompanionCount()).toBe(0);
 
@@ -32,6 +34,16 @@ describe('Clicking Counter Calamity', () => {
         it('purchaseCompanion reduces clickCount by 100', () => {
             underTest.purchaseCompanion();
             expect(underTest.clickCount).toBe(-100);
+        });
+        it('purchaseCompanion cost should increase by 20 everytime', () => {
+            const numberOfCompanions = Math.floor(Math.random() * 20) + 1;
+            let companionCost = 100;
+            for (let i = 0; i <= numberOfCompanions; i++) {
+                underTest.purchaseCompanion();
+                companionCost += 20;
+            }
+            expect(underTest.getCompanionCost()).toBe(companionCost);
+
         });
 
     });
@@ -47,6 +59,15 @@ describe('Clicking Counter Calamity', () => {
         it('purchaseCompanion reduces clickCount by 10', () => {
             underTest.purchaseCompounder();
             expect(underTest.clickCount).toBe(-10);
+        });
+        it('purchaseCompounder cost should increase by 10 everytime', () => {
+            const numberOfCompanions = Math.floor(Math.random() * 20) + 1;
+            let compounderCost = 10;
+            for (let i = 0; i <= numberOfCompanions; i++) {
+                underTest.purchaseCompounder();
+                compounderCost += 10;
+            }
+            expect(underTest.getCompounderCost()).toBe(compounderCost);
         });
     });
 
