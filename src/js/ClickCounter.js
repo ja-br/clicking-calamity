@@ -19,10 +19,13 @@ class ClickCount {
         return this._companionCost;
     }
 
-    purchaseCompanion() {
-        this._clickCount -= this._companionCost;
-        this._companionCost += 20;
-        this._companionCount++;
+    collectCompanion() {
+        if (this._clickCount >= this.getCompanionCost()) {
+            this._clickCount -= this._companionCost;
+            this._companionCost += 20;
+            this._companionCount++;
+        }
+
     }
 
 
@@ -34,7 +37,7 @@ class ClickCount {
         return this._compounderCost;
     }
 
-    purchaseCompounder() {
+    collectCompounder() {
         this._clickCount -= this._compounderCost;
         this._compounderCost += 10;
         this._compounderCount++;
@@ -43,7 +46,7 @@ class ClickCount {
     getClickCount() {
         return this._clickCount;
     }
-    corralClickCompanions() {
+    cashClickCompanions() {
         this._clickCount += this._companionCount;
 
     }
