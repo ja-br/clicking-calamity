@@ -71,18 +71,45 @@ describe('Clicking Counter Calamity', () => {
             underTest.collectCompounder();
             expect(underTest.getCompounderCount()).toBe(1);
         });
-        it('collectCompanion reduces clickCount by 10', () => {
+        it('collectCompounder reduces clickCount by 10', () => {
             underTest.collectCompounder();
             expect(underTest.getClickCount()).toBe(90);
         });
         it('collectCompounder cost should increase by 10 everytime', () => {
+            underTest._clickCount = 999999;
             const numberOfCompanions = Math.floor(Math.random() * 20) + 1;
             let compounderCost = 10;
+
             for (let i = 0; i <= numberOfCompanions; i++) {
+
                 underTest.collectCompounder();
                 compounderCost += 10;
             }
             expect(underTest.getCompounderCost()).toBe(compounderCost);
+        });
+        it('collectCompounder() does not run if there are insufficient clickCount', () => {
+            underTest._clickCount = 5;
+            underTest.collectCompounder();
+            expect(underTest.getClickCount()).toBe(5);
+        })
+        it('1 Compounder increases clickFactor to 1.2x', () => {
+            underTest.collectCompounder();
+            expect(underTest.getClickFactor()).toBe(1.2)
+        });
+        it('2 Compounders increase clickFactor to 1.44 ', () => {
+            underTest.collectCompounder();
+            underTest.collectCompounder();
+            expect(underTest.getClickFactor()).toBe(1.44)
+        });
+        it('multiple compounders go super crazy', () => {
+            underTest._clickCount = 999999;
+            const numberOfCompounders = Math.floor(Math.random() * 20) + 1;
+            let testClickFactor = 1.2;
+            for (let i = 0; i <= numberOfCompounders; i++) {
+                underTest.collectCompounder();
+                testClickFactor = (testClickFactor * testClickFactor)
+            }
+            expect(underTest.getClickFactor()).toBe(testClickFactor);
         });
     });
 

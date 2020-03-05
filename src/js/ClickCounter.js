@@ -5,6 +5,7 @@ class ClickCount {
         this._compounderCount = 0;
         this._companionCost = 100;
         this._compounderCost = 10;
+        this._clickFactor = 1;
     }
 
     click() {
@@ -38,9 +39,18 @@ class ClickCount {
     }
 
     collectCompounder() {
-        this._clickCount -= this._compounderCost;
-        this._compounderCost += 10;
-        this._compounderCount++;
+        if (this._clickCount >= this.getCompounderCost()) {
+            this._clickCount -= this._compounderCost;
+            this._compounderCost += 10;
+            this._compounderCount++;
+            if (this._clickFactor == 1) {
+                this._clickFactor = 1.2;
+            } else {
+                this._clickFactor = (this._clickFactor * this._clickFactor)
+            }
+
+        }
+
     }
 
     getClickCount() {
@@ -49,5 +59,9 @@ class ClickCount {
     cashClickCompanions() {
         this._clickCount += this._companionCount;
 
+    }
+
+    getClickFactor() {
+        return this._clickFactor;
     }
 }
