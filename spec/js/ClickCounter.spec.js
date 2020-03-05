@@ -1,22 +1,19 @@
 describe('Clicking Counter Calamity', () => {
-    let underTest = new ClickCount();
+    let underTest;
     beforeEach(() => {
-        underTest.clickCount = 0;
-        underTest.companionCount = 0;
-        underTest.compounderCount = 0;
-        underTest.companionCost = 100;
-        underTest.compounderCost = 10;
+        underTest = new ClickCount();
+
     })
     describe('countClick() records clicks and Clickcounter can give the clickCount', () => {
 
         it('clickCount() 1 time should return 1', () => {
             underTest.click();
-            expect(underTest.clickCount).toBe(1);
+            expect(underTest.getClickCount()).toBe(1);
         });
         it('countClick() twice should return clickCount of 2', () => {
             underTest.click();
             underTest.click();
-            expect(underTest.clickCount).toBe(2);
+            expect(underTest.getClickCount()).toBe(2);
         });
     });
 
@@ -32,9 +29,13 @@ describe('Clicking Counter Calamity', () => {
             expect(underTest.getCompanionCount()).toBe(1);
 
         });
+        it('purchaseCompanion does not run if there are insufficient clickCount', () => {
+            underTest.purchaseCompanion();
+
+        });
         it('purchaseCompanion reduces clickCount by 100', () => {
             underTest.purchaseCompanion();
-            expect(underTest.clickCount).toBe(-100);
+            expect(underTest.getClickCount()).toBe(-100);
         });
         it('purchaseCompanion cost should increase by 20 everytime', () => {
             const numberOfCompanions = Math.floor(Math.random() * 20) + 1;
@@ -67,7 +68,7 @@ describe('Clicking Counter Calamity', () => {
         });
         it('purchaseCompanion reduces clickCount by 10', () => {
             underTest.purchaseCompounder();
-            expect(underTest.clickCount).toBe(-10);
+            expect(underTest.getClickCount()).toBe(-10);
         });
         it('purchaseCompounder cost should increase by 10 everytime', () => {
             const numberOfCompanions = Math.floor(Math.random() * 20) + 1;

@@ -1,50 +1,50 @@
 class ClickCount {
     constructor() {
-        this.clickCount = 0;
-        this.companionCount = 0;
-        this.compounderCount = 0;
-        this.companionCost = 100;
-        this.compounderCost = 10;
+        this._clickCount = 0;
+        this._companionCount = 0;
+        this._compounderCount = 0;
+        this._companionCost = 100;
+        this._compounderCost = 10;
     }
 
     click() {
-        this.clickCount++;
+        this._clickCount++;
     }
 
     getCompanionCount() {
-        return this.companionCount;
+        return this._companionCount;
     }
 
     getCompanionCost() {
-        return this.companionCost;
+        return this._companionCost;
     }
 
     purchaseCompanion() {
-        this.clickCount -= this.companionCost;
-        this.companionCost += 20;
-        this.companionCount++;
+        this._clickCount -= this._companionCost;
+        this._companionCost += 20;
+        this._companionCount++;
     }
 
 
     getCompounderCount() {
-        return this.compounderCount;
+        return this._compounderCount;
     }
 
     getCompounderCost() {
-        return this.compounderCost;
+        return this._compounderCost;
     }
 
     purchaseCompounder() {
-        this.clickCount -= this.compounderCost;
-        this.compounderCost += 10;
-        this.compounderCount++;
+        this._clickCount -= this._compounderCost;
+        this._compounderCost += 10;
+        this._compounderCount++;
     }
 
     getClickCount() {
-        return this.clickCount;
+        return this._clickCount;
     }
     corralClickCompanions() {
-        this.clickCount += this.companionCount;
+        this._clickCount += this._companionCount;
 
     }
 }
