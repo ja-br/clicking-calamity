@@ -12,6 +12,15 @@ class ClickCount {
         this._clickCount += this._clickFactor;
     }
 
+    reset() {
+        this._clickCount = 0;
+        this._companionCount = 0;
+        this._compounderCount = 0;
+        this._companionCost = 100;
+        this._compounderCost = 10;
+        this._clickFactor = 1;
+    }
+
     getCompanionCount() {
         return this._companionCount;
     }
@@ -26,9 +35,7 @@ class ClickCount {
             this._companionCost += 20;
             this._companionCount++;
         }
-
     }
-
 
     getCompounderCount() {
         return this._compounderCount;
@@ -48,9 +55,7 @@ class ClickCount {
             } else {
                 this._clickFactor = (Math.pow(1.2, this._compounderCount))
             }
-
         }
-
     }
 
     getClickCount() {

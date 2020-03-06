@@ -5,7 +5,7 @@ describe('Clicking Counter Calamity', () => {
         underTest._clickCount = 100;
 
     })
-    describe('countClick() records clicks and Clickcounter can give the clickCount', () => {
+    describe('ClickCount() records clicks and Clickcounter can give the clickCount', () => {
         beforeEach(() => {
             underTest._clickCount = 0;
         })
@@ -13,17 +13,25 @@ describe('Clicking Counter Calamity', () => {
             underTest.click();
             expect(underTest.getClickCount()).toBe(1);
         });
-        it('getCountClick() should return clickCount of 2 when clicked twuice', () => {
+        it('getCountClick() should return clickCount of 2 when clicked twice', () => {
             underTest.click();
             underTest.click();
             expect(underTest.getClickCount()).toBe(2);
         });
-        it('getClickCOunt() should return 1.2 when clicked and clickFactor is 1.2', () => {
-            underTest._clickFactor = 1.2;
+
+        it('getClickCount() should be 1.2 when click() after collectCompounder', () => {
+            underTest._clickCount = 10;
+            underTest.collectCompounder();
             underTest.click();
             expect(underTest.getClickCount()).toBe(1.2);
         });
-
+        it('getClickCount() should be 1.44 when click() after 2 collectCompounder', () => {
+            underTest._clickCount = 30;
+            underTest.collectCompounder();
+            underTest.collectCompounder();
+            underTest.click();
+            expect(underTest.getClickCount()).toBe(1.44);
+        });
     });
 
     describe('Clicking Companions', () => {
@@ -110,6 +118,23 @@ describe('Clicking Counter Calamity', () => {
             expect(underTest.getClickFactor()).toBe(1.44)
         });
 
+    });
+    describe('Click Count Reset', () => {
+        it('should reset all ClickCount() fields', () => {
+
+            for (let i = 10000; i > 0; i--) {
+                underTest.click();
+            }
+            underTest.collectCompanion();
+            underTest.collectCompounder();
+            underTest.reset();
+            expect(underTest.getClickCount()).toBe(0);
+            expect(underTest.getCompanionCount()).toBe(0);
+            expect(underTest.getCompanionCost()).toBe(100);
+            expect(underTest.getCompounderCost()).toBe(10);
+            expect(underTest.getCompounderCount()).toBe(0);
+            expect(underTest.getClickFactor()).toBe(1);
+        });
     });
 
 });

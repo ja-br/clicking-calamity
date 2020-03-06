@@ -1,0 +1,1 @@
+const newCounter = new ClickCount();
