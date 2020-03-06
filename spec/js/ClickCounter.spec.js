@@ -6,16 +6,24 @@ describe('Clicking Counter Calamity', () => {
 
     })
     describe('countClick() records clicks and Clickcounter can give the clickCount', () => {
+        beforeEach(() => {
+            underTest._clickCount = 0;
+        })
+        it('getClickCount() should return 1 when clicked once', () => {
+            underTest.click();
+            expect(underTest.getClickCount()).toBe(1);
+        });
+        it('getCountClick() should return clickCount of 2 when clicked twuice', () => {
+            underTest.click();
+            underTest.click();
+            expect(underTest.getClickCount()).toBe(2);
+        });
+        it('getClickCOunt() should return 1.2 when clicked and clickFactor is 1.2', () => {
+            underTest._clickFactor = 1.2;
+            underTest.click();
+            expect(underTest.getClickCount()).toBe(1.2);
+        });
 
-        it('clickCount() 1 time should return 1', () => {
-            underTest.click();
-            expect(underTest.getClickCount()).toBe(101);
-        });
-        it('countClick() twice should return clickCount of 2', () => {
-            underTest.click();
-            underTest.click();
-            expect(underTest.getClickCount()).toBe(102);
-        });
     });
 
     describe('Clicking Companions', () => {
@@ -101,16 +109,7 @@ describe('Clicking Counter Calamity', () => {
             underTest.collectCompounder();
             expect(underTest.getClickFactor()).toBe(1.44)
         });
-        it('multiple compounders go super crazy', () => {
-            underTest._clickCount = 999999;
-            const numberOfCompounders = Math.floor(Math.random() * 20) + 1;
-            let testClickFactor = 1.2;
-            for (let i = 0; i <= numberOfCompounders; i++) {
-                underTest.collectCompounder();
-                testClickFactor = (testClickFactor * testClickFactor)
-            }
-            expect(underTest.getClickFactor()).toBe(testClickFactor);
-        });
+
     });
 
 });

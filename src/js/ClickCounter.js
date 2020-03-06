@@ -9,7 +9,7 @@ class ClickCount {
     }
 
     click() {
-        this._clickCount++;
+        this._clickCount += this._clickFactor;
     }
 
     getCompanionCount() {
@@ -46,7 +46,7 @@ class ClickCount {
             if (this._clickFactor == 1) {
                 this._clickFactor = 1.2;
             } else {
-                this._clickFactor = (this._clickFactor * this._clickFactor)
+                this._clickFactor = (Math.pow(1.2, this._compounderCount))
             }
 
         }
@@ -56,6 +56,7 @@ class ClickCount {
     getClickCount() {
         return this._clickCount;
     }
+
     cashClickCompanions() {
         this._clickCount += this._companionCount;
 
