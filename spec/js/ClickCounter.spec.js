@@ -72,8 +72,25 @@ describe('Clicking Counter Calamity', () => {
             underTest.collectCompanion();
             underTest.collectCompanion();
             underTest.cashClickCompanions();
-            let clickCount = underTest.getClickCount();
-            expect(clickCount).toBe(1);
+            expect(underTest.getClickCount()).toBe(1);
+        });
+
+        it('should apply click compounder', () => {
+            underTest.collectCompounder();
+            underTest._clickCount = 0;
+            underTest._compounderCount = 1;
+            underTest._companionCount = 1;
+            underTest.cashClickCompanions();
+            expect(underTest.getClickCount()).toBe(1.2)
+        });
+        it('should apply click compounder', () => {
+            underTest.collectCompounder();
+            underTest.collectCompounder();
+            underTest._clickCount = 0;
+            underTest._compounderCount = 1;
+            underTest._companionCount = 1;
+            underTest.cashClickCompanions();
+            expect(underTest.getClickCount()).toBe(1.44)
         });
 
     });

@@ -63,7 +63,9 @@ class ClickCount {
     }
 
     cashClickCompanions() {
-        this._clickCount += this._companionCount;
+        for (let i = 1; i <= this.getCompanionCount(); i++) {
+            this.click()
+        }
 
     }
 
