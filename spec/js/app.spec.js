@@ -9,8 +9,14 @@ describe('app.js manipulates the DOM to reflect the status of a ClickCounter obj
         testDisplayElement = document.createElement('div');
         testAddClickButton = document.createElement('button');
         testCollectElement = document.createElement('div')
+        testCounterObject._clickCount = 0;
+        testCounterObject._companionCount = 0;
+        testCounterObject._compounderCount = 0;
+        testCounterObject._companionCost = 100;
+        testCounterObject._compounderCost = 10;
+        testCounterObject._clickFactor = 1;
     })
-    describe('updateClickCount() changes an element innerText to match clickCount', () => {
+    describe('Clicker', () => {
         it('testClickDisplay should have an innerText of "0" if there are no clicks', () => {
             updateClickCount(testDisplayElement, testCounterObject);
             expect(testDisplayElement.innerText).toBe('0');
@@ -25,7 +31,7 @@ describe('app.js manipulates the DOM to reflect the status of a ClickCounter obj
             expect(testDisplayElement.innerText).toBe('3');
         });
     });
-    describe('updateCompounderCount() changes element innerText to match compounderCount', () => {
+    describe('compounderElements', () => {
         it('testDisplay should have in innerText of "0" if there are no compounders', () => {
             updateCompounderCount(testDisplayElement, testCounterObject);
             expect(testDisplayElement.innerText).toBe('0')
@@ -35,8 +41,19 @@ describe('app.js manipulates the DOM to reflect the status of a ClickCounter obj
             updateCompounderCount(testDisplayElement, testCounterObject);
             expect(testDisplayElement.innerText).toBe('10')
         });
+        it('should update display with cost of buying a new compounder', () => {
+            testCounterObject._clickCount = 30;
+            updateCompounderCost(testDisplayElement, testCounterObject)
+            expect(testDisplayElement.innerText).toBe('10')
+            testCounterObject.collectCompounder();
+            updateCompounderCost(testDisplayElement, testCounterObject)
+            expect(testDisplayElement.innerText).toBe('20')
+            testCounterObject.collectCompounder();
+            updateCompounderCost(testDisplayElement, testCounterObject)
+            expect(testDisplayElement.innerText).toBe('30')
+        });
     });
-    describe('updateCompanionCount() changes element innerText to match companionCount', () => {
+    describe('change companion elements', () => {
         it('testDisplay should have in innerText of "0" if there are no companions', () => {
             updateCompanionCount(testDisplayElement, testCounterObject);
             expect(testDisplayElement.innerText).toBe('0')
@@ -45,6 +62,13 @@ describe('app.js manipulates the DOM to reflect the status of a ClickCounter obj
             testCounterObject._companionCount = 10
             updateCompanionCount(testDisplayElement, testCounterObject);
             expect(testDisplayElement.innerText).toBe('10')
+        });
+        it('updateCompanionCost() update display with cost of buying new companion', () => {
+            testCounterObject._clickCount = 100;
+            updateCompanionCost(testDisplayElement, testCounterObject);
+            testCounterObject.collectCompanion()
+            updateCompanionCost(testDisplayElement, testCounterObject);
+            expect(testDisplayElement.innerText).toBe('120');
         });
     });
     describe('hideCollectElement() changes element class to hide', () => {
@@ -58,5 +82,6 @@ describe('app.js manipulates the DOM to reflect the status of a ClickCounter obj
             updateClickFactor(testDisplayElement, testCounterObject);
             expect(testDisplayElement.innerText).toBe('1');
         });
+
     })
 })
