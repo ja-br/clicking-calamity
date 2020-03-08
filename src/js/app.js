@@ -1,3 +1,14 @@
+const clickButton = document.querySelector('#main-button')
+const clickCount = document.querySelector('#click-count')
+const companionCount = document.querySelector('#companion-count')
+const compounderCount = document.querySelector('#compounder-count')
+const clickFactor = document.querySelector('#click-factor')
+const companionCollector = document.querySelector('#companions-button')
+const compounderCollector = document.querySelector('#compounders-button')
+const companionCollectionCost = document.querySelector('#companion-cost')
+const compounderCollectionCost = document.querySelector('#compounder-cost')
+const Counter = new ClickCount();
+
 const updateClickCount = (displayClicksElement, counterObject) => {
     displayClicksElement.innerText = Math.floor(counterObject.getClickCount());
 }
@@ -56,20 +67,18 @@ const makeCompounderCollector = (collector, counterObject) => {
     })
 }
 
-const clickButton = document.querySelector('#main-button')
-const clickCount = document.querySelector('#click-count')
-const companionCount = document.querySelector('#companion-count')
-const compounderCount = document.querySelector('#compounder-count')
-const clickFactor = document.querySelector('#click-factor')
-const companionCollector = document.querySelector('#companions-button')
-const compounderCollector = document.querySelector('#compounders-button')
-const companionCollectionCost = document.querySelector('#companion-cost')
-const compounderCollectionCost = document.querySelector('#compounder-cost')
-const Counter = new ClickCount();
 
 
 
+
+
+window.onload = ()=>{
 makeClickerButton(clickButton, clickCount, Counter)
 makeCompanionCollector(companionCollector, Counter)
 makeCompounderCollector(compounderCollector, Counter)
-updateAll()
+setInterval(() => {
+    Counter.cashClickCompanions();
+    updateAll()
+
+}, 1000);
+}

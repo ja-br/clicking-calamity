@@ -48,7 +48,7 @@ class ClickCount {
     collectCompounder() {
         if (this._clickCount >= this.getCompounderCost()) {
             this._clickCount -= this._compounderCost;
-            this._compounderCost += 10 + (this._companionCost * 0.125);
+            this._compounderCost += Math.round((this.getCompounderCost() * 0.125)) + 10;
             this._compounderCount++;
             if (this._clickFactor == 1) {
                 this._clickFactor = 1.2;
