@@ -56,7 +56,7 @@ const updateCompanionCost = (displayCompanionCostElement, counterObject) => {
 }
 
 const checkCompounderPosition = (counterObject) => {
-    if(counterObject.getCompounderCost() > counterObject.getClickCount()){
+    if(counterObject.getCompounderCost() > counterObject.getClickCount() && compounderCollector.classList.contains('fly-in-left')){
         compounderCollector.classList.add('fly-out-right')
         compounderCollector.classList.remove('fly-in-left')
 
@@ -65,7 +65,7 @@ const checkCompounderPosition = (counterObject) => {
 }
 
 const checkCompanionPosition = (counterObject) => {
-    if(counterObject.getCompanionCost() > counterObject.getClickCount()){
+    if(counterObject.getCompanionCost() > counterObject.getClickCount() && companionCollector.classList.contains('fly-in-right')){
         companionCollector.classList.add('fly-out-left')
         companionCollector.classList.remove('fly-in-right')
 

@@ -32,8 +32,8 @@ class ClickCount {
     collectCompanion() {
         if (this._clickCount >= this.getCompanionCost()) {
             this._clickCount -= this._companionCost;
-            this._companionCost += 20 + Math.round((this._companionCost * 0.05));
             this._companionCount++;
+            this._companionCost += Math.round((this._companionCost * 0.05) + (10 * this.getCompanionCount()));
         }
     }
 
@@ -48,8 +48,8 @@ class ClickCount {
     collectCompounder() {
         if (this._clickCount >= this.getCompounderCost()) {
             this._clickCount -= this._compounderCost;
-            this._compounderCost += Math.round((this.getCompounderCost() * 0.125)) + 10;
             this._compounderCount++;
+            this._compounderCost += Math.round((this.getCompounderCost() * 0.25) + (10 * this.getCompounderCount()));
             if (this._clickFactor == 1) {
                 this._clickFactor = 1.2;
             } else {
