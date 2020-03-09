@@ -26,7 +26,7 @@ describe('Clicking Counter Calamity', () => {
             expect(underTest.getClickCount()).toBe(1.2);
         });
         it('getClickCount() should be 1.44 when click() after 2 collectCompounder', () => {
-            underTest._clickCount = 30;
+            underTest._clickCount = 33;
             underTest.collectCompounder();
             underTest.collectCompounder();
             underTest.click();
@@ -53,21 +53,11 @@ describe('Clicking Counter Calamity', () => {
         });
         it('collectCompanion reduces clickCount by companionCost', () => {
             underTest.collectCompanion();
-            underTest._clickCount = 120;
+            underTest._clickCount = 115;
             underTest.collectCompanion();
             expect(underTest.getClickCount()).toBe(0);
         });
-        it('collectCompanion cost should increase by 20 everytime', () => {
-            underTest._clickCount = 999999;
-            const numberOfCompanions = Math.floor(Math.random() * 20) + 1;
-            let companionCost = 100;
-            for (let i = 0; i <= numberOfCompanions; i++) {
-                underTest.collectCompanion();
-                companionCost += 20;
-            }
-            expect(underTest.getCompanionCost()).toBe(companionCost);
 
-        });
         it('1 click should be added to clickCount for every companion', () => {
             underTest.collectCompanion();
             underTest.collectCompanion();
@@ -108,18 +98,7 @@ describe('Clicking Counter Calamity', () => {
             underTest.collectCompounder();
             expect(underTest.getClickCount()).toBe(90);
         });
-        it('collectCompounder cost should increase by 10 everytime', () => {
-            underTest._clickCount = 999999;
-            const numberOfCompanions = Math.floor(Math.random() * 20) + 1;
-            let compounderCost = 10;
 
-            for (let i = 0; i <= numberOfCompanions; i++) {
-
-                underTest.collectCompounder();
-                compounderCost += 10;
-            }
-            expect(underTest.getCompounderCost()).toBe(compounderCost);
-        });
         it('collectCompounder() does not run if there are insufficient clickCount', () => {
             underTest._clickCount = 5;
             underTest.collectCompounder();

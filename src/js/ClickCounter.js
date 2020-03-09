@@ -33,7 +33,7 @@ class ClickCount {
         if (this._clickCount >= this.getCompanionCost()) {
             this._clickCount -= this._companionCost;
             this._companionCount++;
-            this._companionCost += Math.round((this._companionCost * 0.05) + (10 * this.getCompanionCount()));
+            this._companionCost += Math.round((this._companionCost * 0.05) + ((10 * this.getCompounderCount()) * this.getCompanionCount()));
         }
     }
 
@@ -49,7 +49,7 @@ class ClickCount {
         if (this._clickCount >= this.getCompounderCost()) {
             this._clickCount -= this._compounderCost;
             this._compounderCount++;
-            this._compounderCost += Math.round((this.getCompounderCost() * 0.25) + (10 * this.getCompounderCount()));
+            this._compounderCost += Math.round((this.getCompounderCost() * 0.25) + (Math.floor(this.getClickFactor() * 2) * this.getCompounderCount()));
             if (this._clickFactor == 1) {
                 this._clickFactor = 1.2;
             } else {

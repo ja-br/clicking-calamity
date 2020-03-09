@@ -10,14 +10,14 @@ const compounderCollectionCost = document.querySelector('#compounder-cost')
 const Counter = new ClickCount();
 
 const updateClickCount = (displayClicksElement, counterObject) => {
-    if(counterObject.getClickCount() > 0){
+    if (counterObject.getClickCount() > 0) {
         clickCount.classList.remove('container__communicator--hide');
     }
-    if(counterObject.getClickCount() >= counterObject.getCompounderCost()){
+    if (counterObject.getClickCount() >= counterObject.getCompounderCost()) {
         compounderCollector.classList.remove('fly-out-right')
         compounderCollector.classList.add('fly-in-left')
     }
-    if(counterObject.getClickCount() >= counterObject.getCompanionCost()){
+    if (counterObject.getClickCount() >= counterObject.getCompanionCost()) {
         companionCollector.classList.remove('fly-out-left')
         companionCollector.classList.add('fly-in-right')
     }
@@ -26,7 +26,7 @@ const updateClickCount = (displayClicksElement, counterObject) => {
 
 
 const updateCompounderCount = (displayCompounderElement, counterObject) => {
-    if(counterObject.getCompounderCount() > 0){
+    if (counterObject.getCompounderCount() > 0) {
         compounderCount.classList.remove('container__communicator--hide')
     }
 
@@ -34,14 +34,14 @@ const updateCompounderCount = (displayCompounderElement, counterObject) => {
 }
 
 const updateCompanionCount = (displayCompanionElement, counterObject) => {
-    if(counterObject.getCompanionCount() > 0){
+    if (counterObject.getCompanionCount() > 0) {
         companionCount.classList.remove('container__communicator--hide')
     }
     displayCompanionElement.innerText = "Companions: " + counterObject.getCompanionCount();
 }
 
 const updateClickFactor = (displayClickFactorElement, counterObject) => {
-    if(counterObject.getClickFactor() > 1 ){
+    if (counterObject.getClickFactor() > 1) {
         clickFactor.classList.remove('container__communicator--hide')
     }
     displayClickFactorElement.innerText = "Each click is worth " + counterObject.getClickFactor().toFixed(2) + " clicks";
@@ -56,7 +56,7 @@ const updateCompanionCost = (displayCompanionCostElement, counterObject) => {
 }
 
 const checkCompounderPosition = (counterObject) => {
-    if(counterObject.getCompounderCost() > counterObject.getClickCount() && compounderCollector.classList.contains('fly-in-left')){
+    if (counterObject.getCompounderCost() > counterObject.getClickCount() && compounderCollector.classList.contains('fly-in-left')) {
         compounderCollector.classList.add('fly-out-right')
         compounderCollector.classList.remove('fly-in-left')
 
@@ -65,7 +65,7 @@ const checkCompounderPosition = (counterObject) => {
 }
 
 const checkCompanionPosition = (counterObject) => {
-    if(counterObject.getCompanionCost() > counterObject.getClickCount() && companionCollector.classList.contains('fly-in-right')){
+    if (counterObject.getCompanionCost() > counterObject.getClickCount() && companionCollector.classList.contains('fly-in-right')) {
         companionCollector.classList.add('fly-out-left')
         companionCollector.classList.remove('fly-in-right')
 
@@ -92,7 +92,7 @@ const makeClickerButton = (clicker, clickCount, counterObject) => {
 
 const makeCompanionCollector = (collector, counterObject) => {
     collector.addEventListener('click', () => {
-        if(counterObject.getCompanionCount() == 0){
+        if (counterObject.getCompanionCount() == 0) {
             turnOnAutoClicker();
         }
         counterObject.collectCompanion();
@@ -111,7 +111,7 @@ const makeCompounderCollector = (collector, counterObject) => {
     })
 }
 
-const turnOnAutoClicker = ()=>{
+const turnOnAutoClicker = () => {
     setInterval(() => {
         Counter.cashClickCompanions();
         updateAll()
@@ -128,7 +128,7 @@ const startCounter = () => {
 }
 
 
-window.onload = ()=>{
-    
+window.onload = () => {
+
     startCounter()
 }
