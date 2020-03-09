@@ -10,32 +10,69 @@ const compounderCollectionCost = document.querySelector('#compounder-cost')
 const Counter = new ClickCount();
 
 const updateClickCount = (displayClicksElement, counterObject) => {
+    if(counterObject.getClickCount() > 0){
+        clickCount.classList.remove('container__communicator--hide');
+    }
+    if(counterObject.getClickCount() >= counterObject.getCompounderCost()){
+        compounderCollector.classList.remove('fly-out-right')
+        compounderCollector.classList.add('fly-in-left')
+    }
+    if(counterObject.getClickCount() >= counterObject.getCompanionCost()){
+        companionCollector.classList.remove('fly-out-left')
+        companionCollector.classList.add('fly-in-right')
+    }
     displayClicksElement.innerText = Math.floor(counterObject.getClickCount());
 }
 
-const hideElement = (elementToHide) => {
-    elementToHide.classList.add("hide")
-}
 
 const updateCompounderCount = (displayCompounderElement, counterObject) => {
-    displayCompounderElement.innerText = counterObject.getCompounderCount();
+    if(counterObject.getCompounderCount() > 0){
+        compounderCount.classList.remove('container__communicator--hide')
+    }
+
+    displayCompounderElement.innerText = "Compounders: " + counterObject.getCompounderCount();
 }
 
 const updateCompanionCount = (displayCompanionElement, counterObject) => {
-    displayCompanionElement.innerText = counterObject.getCompanionCount();
+    if(counterObject.getCompanionCount() > 0){
+        companionCount.classList.remove('container__communicator--hide')
+    }
+    displayCompanionElement.innerText = "Companions: " + counterObject.getCompanionCount();
 }
 
 const updateClickFactor = (displayClickFactorElement, counterObject) => {
-    displayClickFactorElement.innerText = counterObject.getClickFactor().toFixed(2);
+    if(counterObject.getClickFactor() > 1 ){
+        clickFactor.classList.remove('container__communicator--hide')
+    }
+    displayClickFactorElement.innerText = "Each click is worth " + counterObject.getClickFactor().toFixed(2) + " clicks";
 }
 
 const updateCompounderCost = (displayCompounderCostElement, counterObject) => {
-    displayCompounderCostElement.innerText = counterObject.getCompounderCost();
+    displayCompounderCostElement.innerText = "Collection cost: " + counterObject.getCompounderCost();
 }
 
 const updateCompanionCost = (displayCompanionCostElement, counterObject) => {
-    displayCompanionCostElement.innerText = counterObject.getCompanionCost();
+    displayCompanionCostElement.innerText = "Collection cost: " + counterObject.getCompanionCost();
 }
+
+const checkCompounderPosition = (counterObject) => {
+    if(counterObject.getCompounderCost() > counterObject.getClickCount()){
+        compounderCollector.classList.add('fly-out-right')
+        compounderCollector.classList.remove('fly-in-left')
+
+
+    }
+}
+
+const checkCompanionPosition = (counterObject) => {
+    if(counterObject.getCompanionCost() > counterObject.getClickCount()){
+        companionCollector.classList.add('fly-out-left')
+        companionCollector.classList.remove('fly-in-right')
+
+
+    }
+}
+
 
 const updateAll = () => {
     updateClickCount(clickCount, Counter)
@@ -55,7 +92,12 @@ const makeClickerButton = (clicker, clickCount, counterObject) => {
 
 const makeCompanionCollector = (collector, counterObject) => {
     collector.addEventListener('click', () => {
+        if(counterObject.getCompanionCount() == 0){
+            turnOnAutoClicker();
+        }
         counterObject.collectCompanion();
+        checkCompanionPosition(counterObject);
+        checkCompounderPosition(counterObject);
         updateAll();
     })
 }
@@ -63,22 +105,30 @@ const makeCompanionCollector = (collector, counterObject) => {
 const makeCompounderCollector = (collector, counterObject) => {
     collector.addEventListener('click', () => {
         counterObject.collectCompounder();
+        checkCompounderPosition(counterObject);
+        checkCompanionPosition(counterObject);
         updateAll();
     })
 }
 
+const turnOnAutoClicker = ()=>{
+    setInterval(() => {
+        Counter.cashClickCompanions();
+        updateAll()
 
+    }, 1000);
+}
 
-
+const startCounter = () => {
+    makeClickerButton(clickButton, clickCount, Counter)
+    makeCompanionCollector(companionCollector, Counter)
+    makeCompounderCollector(compounderCollector, Counter)
+    updateCompounderCost(compounderCollectionCost, Counter)
+    updateCompanionCost(companionCollectionCost, Counter)
+}
 
 
 window.onload = ()=>{
-makeClickerButton(clickButton, clickCount, Counter)
-makeCompanionCollector(companionCollector, Counter)
-makeCompounderCollector(compounderCollector, Counter)
-setInterval(() => {
-    Counter.cashClickCompanions();
-    updateAll()
-
-}, 1000);
+    
+    startCounter()
 }
