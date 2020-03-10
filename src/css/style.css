@@ -1,110 +1,142 @@
-
 *,
 *::before,
 *::after {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
 }
 
-body{
+body {
     font-family: Arial, Helvetica, sans-serif;
     user-select: none;
 
 }
 
-.container{
+.container {
     transition: transform 200ms ease-out;
 
 }
 
 
-.container__panel{
-}
+.container__panel {}
 
 
-.container__title{
+.container__title {
     text-align: center;
     font-size: 5rem;
 }
 
-.container__communicator{
+.container__communicator {
     padding-top: 15px;
     text-align: center;
 }
 
-.container__communicator--hide{
+.container__communicator--hide {
     visibility: hidden;
 }
 
-.container__communicator{
+.container__communicator {
     font-size: 6rem;
 }
 
-.container__mini-communicator{
+.container__mini-communicator {
     text-align: center;
     font-size: 1rem;
     font-weight: 600;
-    color: rgba(0,0,0,0.5);
+    color: rgba(0, 0, 0, 0.5);
     margin: 0;
 }
 
+#reset-button {
+    color: white;
+    font-size: 2rem;
+    font-weight: 600;
+    background-color: rgba(0, 0, 0, 0.3);
+    padding: 5px;
+    border-radius: 15px;
+    margin: 0 25px;
+    height: min-content;
+}
 
-#companions-button{
+
+#companions-button {
     border-radius: 0 15px 15px 0;
     margin-right: 20px;
     transform: translateX(-100%);
 
 }
 
-.fly-in-right{
+.fly-in-right {
     animation-name: fly-in-right;
     animation-duration: 150ms;
     animation-fill-mode: forwards;
 }
 
-@keyframes fly-in-right{
-    0%{}
-    100%{transform: translateX(0%);}
+@keyframes fly-in-right {
+    0% {}
+
+    100% {
+        transform: translateX(0%);
+    }
 }
 
-.fly-out-left{
+.fly-out-left {
     animation-name: fly-out-left;
     animation-duration: 150ms;
     animation-fill-mode: forwards;
 }
 
-@keyframes fly-out-left{
-    0%{transform: translateX(0%);}
-    100%{transform: translateX(-100%);}
+@keyframes fly-out-left {
+    0% {
+        transform: translateX(0%);
+    }
+
+    100% {
+        transform: translateX(-100%);
+    }
 }
 
 
-#compounders-button{
+#compounders-button {
     border-radius: 15px 0 0 15px;
     margin-left: 20px;
     transform: translateX(100%);
 }
 
-.fly-in-left{
+.fly-in-left {
     animation-name: fly-in-left;
     animation-duration: 150ms;
     animation-fill-mode: forwards;
 }
 
-@keyframes fly-in-left{
-    0%{}
-    100%{transform: translateX(0%);}
+@keyframes fly-in-left {
+    0% {}
+
+    100% {
+        transform: translateX(0%);
+    }
 }
 
-.fly-out-right{
+.fly-out-right {
     animation-name: fly-out-right;
     animation-duration: 150ms;
     animation-fill-mode: forwards;
 }
 
-@keyframes fly-out-right{
-    0%{transform: translateX(0%);}
-    100%{transform: translateX(100%);}
+@keyframes fly-out-right {
+    0% {
+        transform: translateX(0%);
+    }
+
+    100% {
+        transform: translateX(100%);
+    }
+}
+
+
+.container__widget {
+    background: lightblue;
+    margin-bottom: 15px;
+    border-radius: 15px;
 }

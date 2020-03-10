@@ -1,75 +1,91 @@
-.container{
+.container {
     display: grid;
-    grid-template-rows: 1fr 15fr 8fr;
+    grid-template-rows: 1fr 15fr 3fr 8fr;
     grid-template-columns: repeat(5, 1fr);
     height: 100vh;
 }
 
-.container__header{
+.container__header {
     grid-row: 1
 }
 
 
 
-.container__panel{
+.container__panel {
     grid-row: 2;
     display: grid;
     grid-template-rows: 1fr 1fr;
 }
 
-.container__title{
+.container__title {
     align-self: center;
     grid-row: 2;
     position: relative;
 }
 
-.container__communicator{
+.container__communicator {
     align-self: end;
     grid-row: 1;
 }
 
-.container__mini-communicator{
+.container__mini-communicator {
     grid-row: 3;
 
 }
 
-#main-button{
+#main-button {
     grid-column: 2/5;
 }
 
-#companions-button{
+
+
+#reset-button {
+    grid-row: 3;
+    grid-column: 3;
+    align-self: center;
+}
+
+#companions-button {
     grid-column: 1;
 }
 
-#companions-button .container__title{
+#companions-button .container__title {
     font-size: 3rem;
 }
 
-#compounders-button{
+#compounders-button {
     grid-column: 3;
 }
 
-#compounders-button .container__title{
+#compounders-button .container__title {
     font-size: 3rem;
 }
 
 
-footer{
-    position: fixed;
-    bottom: 0;
+.container__widget {
+    grid-row: 4;
+    grid-column: 2/5;
+    height: 50%;
+    align-self: center;
     display: grid;
-
+    grid-template-rows: 1fr 5fr;
+    grid-template-columns: repeat(7, 1fr);
 }
 
-#companions-button{
+#background-title {
+    grid-column: 3/6;
+    text-align: center;
+}
+
+#companions-button {
     grid-column: 1/3;
 }
 
-#compounders-button{
+#compounders-button {
     grid-column: 4/6;
 }
 
-.collector{
+.collector {
     grid-row: 3;
     background-color: lightblue;
     align-self: start;

@@ -1,5 +1,6 @@
 const clickButton = document.querySelector('#main-button')
 const clickCount = document.querySelector('#click-count')
+const resetButton = document.querySelector('#reset-button')
 const companionCount = document.querySelector('#companion-count')
 const compounderCount = document.querySelector('#compounder-count')
 const clickFactor = document.querySelector('#click-factor')
@@ -10,6 +11,7 @@ const compounderCollectionCost = document.querySelector('#compounder-cost')
 const Counter = new ClickCount();
 
 const updateClickCount = (displayClicksElement, counterObject) => {
+
     if (counterObject.getClickCount() > 0) {
         clickCount.classList.remove('container__communicator--hide');
     }
@@ -73,20 +75,21 @@ const checkCompanionPosition = (counterObject) => {
     }
 }
 
-
-const updateAll = () => {
-    updateClickCount(clickCount, Counter)
-    updateCompounderCount(compounderCount, Counter)
-    updateCompanionCount(companionCount, Counter);
-    updateClickFactor(clickFactor, Counter);
-    updateCompounderCost(compounderCollectionCost, Counter);
-    updateCompanionCost(companionCollectionCost, Counter);
-}
-
 const makeClickerButton = (clicker, clickCount, counterObject) => {
     clicker.addEventListener('click', () => {
+        if (resetButton.classList.contains('container__communicator--hide')) {
+            resetButton.classList.remove('container__communicator--hide')
+        }
         counterObject.click();
         updateClickCount(clickCount, counterObject)
+    })
+}
+
+const makeResetButton = (clicker, reset, counterObject) => {
+    reset.addEventListener('click', () => {
+        counterObject.reset();
+        resetDisplay();
+        updateAll();
     })
 }
 
@@ -111,6 +114,15 @@ const makeCompounderCollector = (collector, counterObject) => {
     })
 }
 
+const resetDisplay = () => {
+    clickCount.classList.add('container__communicator--hide');
+    compounderCount.classList.add('container__communicator--hide')
+    companionCount.classList.add('container__communicator--hide')
+    clickFactor.classList.add('container__communicator--hide')
+    resetButton.classList.add('container__communicator--hide')
+
+}
+
 const turnOnAutoClicker = () => {
     setInterval(() => {
         Counter.cashClickCompanions();
@@ -119,8 +131,20 @@ const turnOnAutoClicker = () => {
     }, 1000);
 }
 
+const updateAll = () => {
+    updateClickCount(clickCount, Counter)
+    updateCompounderCount(compounderCount, Counter)
+    updateCompanionCount(companionCount, Counter);
+    updateClickFactor(clickFactor, Counter);
+    updateCompounderCost(compounderCollectionCost, Counter);
+    updateCompanionCost(companionCollectionCost, Counter);
+    checkCompanionPosition(Counter);
+    checkCompounderPosition(Counter);
+}
+
 const startCounter = () => {
     makeClickerButton(clickButton, clickCount, Counter)
+    makeResetButton(clickButton, resetButton, Counter)
     makeCompanionCollector(companionCollector, Counter)
     makeCompounderCollector(compounderCollector, Counter)
     updateCompounderCost(compounderCollectionCost, Counter)

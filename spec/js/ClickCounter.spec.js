@@ -25,13 +25,7 @@ describe('Clicking Counter Calamity', () => {
             underTest.click();
             expect(underTest.getClickCount()).toBe(1.2);
         });
-        it('getClickCount() should be 1.44 when click() after 2 collectCompounder', () => {
-            underTest._clickCount = 33;
-            underTest.collectCompounder();
-            underTest.collectCompounder();
-            underTest.click();
-            expect(underTest.getClickCount()).toBe(1.44);
-        });
+
     });
 
     describe('Clicking Companions', () => {
@@ -53,7 +47,7 @@ describe('Clicking Counter Calamity', () => {
         });
         it('collectCompanion reduces clickCount by companionCost', () => {
             underTest.collectCompanion();
-            underTest._clickCount = 115;
+            underTest._clickCount = 105;
             underTest.collectCompanion();
             expect(underTest.getClickCount()).toBe(0);
         });

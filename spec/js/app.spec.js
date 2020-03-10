@@ -1,13 +1,11 @@
 describe('app.js manipulates the DOM to reflect the status of a ClickCounter object', () => {
     let testCounterObject;
     let testDisplayElement;
-    let testAddClickButton;
     let testCollectElement;
 
     beforeEach(() => {
         testCounterObject = new ClickCount();
         testDisplayElement = document.createElement('div');
-        testAddClickButton = document.createElement('button');
         testCollectElement = document.createElement('div')
         testCounterObject._clickCount = 0;
         testCounterObject._companionCount = 0;
@@ -84,4 +82,5 @@ describe('app.js manipulates the DOM to reflect the status of a ClickCounter obj
         });
 
     })
+
 })
