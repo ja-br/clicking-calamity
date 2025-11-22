@@ -47,16 +47,18 @@ describe('Clicking Counter Calamity', () => {
         });
         it('collectCompanion reduces clickCount by companionCost', () => {
             underTest.collectCompanion();
-            underTest._clickCount = 105;
+            underTest._clickCount = 110;
             underTest.collectCompanion();
             expect(underTest.getClickCount()).toBe(0);
         });
 
         it('1 click should be added to clickCount for every companion', () => {
             underTest.collectCompanion();
+            underTest._clickCount = 110;
             underTest.collectCompanion();
+            underTest._clickCount = 0;
             underTest.cashClickCompanions();
-            expect(underTest.getClickCount()).toBe(1);
+            expect(underTest.getClickCount()).toBe(2);
         });
 
         it('should apply click compounder', () => {

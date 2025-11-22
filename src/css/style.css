@@ -4,22 +4,23 @@
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    overflow: hidden;
 }
 
 body {
     font-family: Arial, Helvetica, sans-serif;
     user-select: none;
-
+    overflow: hidden;
 }
 
 .container {
     transition: transform 200ms ease-out;
-
+    overflow: visible;
 }
 
 
-.container__panel {}
+.container__panel {
+    overflow: visible;
+}
 
 
 .container__title {
@@ -48,87 +49,92 @@ body {
     margin: 0;
 }
 
-#reset-button {
-    color: white;
-    font-size: 2rem;
-    font-weight: 600;
-    background-color: rgba(0, 0, 0, 0.3);
-    padding: 5px;
-    border-radius: 15px;
-    margin: 0 25px;
-    height: min-content;
-}
-
-
 #companions-button {
     border-radius: 0 15px 15px 0;
-    transform: translateX(-100%);
+    transform: translateX(-400px);
+    opacity: 0;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    transition: box-shadow 300ms ease;
+}
 
+#companions-button:hover {
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
 }
 
 .fly-in-right {
-    animation-name: fly-in-right;
-    animation-duration: 150ms;
+    animation-name: slide-in-right;
+    animation-duration: 500ms;
+    animation-timing-function: ease-out;
     animation-fill-mode: forwards;
-}
-
-@keyframes fly-in-right {
-    0% {}
-
-    100% {
-        transform: translateX(0%);
-    }
 }
 
 .fly-out-left {
-    animation-name: fly-out-left;
-    animation-duration: 150ms;
+    animation-name: slide-out-left;
+    animation-duration: 500ms;
+    animation-timing-function: ease-in;
     animation-fill-mode: forwards;
 }
 
-@keyframes fly-out-left {
+@keyframes slide-out-left {
     0% {
-        transform: translateX(0%);
+        transform: translateX(0);
+        opacity: 1;
     }
 
     100% {
-        transform: translateX(-100%);
+        transform: translateX(-400px);
+        opacity: 0;
     }
 }
 
 
 #compounders-button {
     border-radius: 15px 0 0 15px;
-    transform: translateX(100%);
+    transform: translateX(400px);
+    opacity: 0;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    transition: box-shadow 300ms ease;
+}
+
+#compounders-button:hover {
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
 }
 
 .fly-in-left {
-    animation-name: fly-in-left;
-    animation-duration: 150ms;
+    animation-name: slide-in-left;
+    animation-duration: 500ms;
+    animation-timing-function: ease-out;
     animation-fill-mode: forwards;
 }
 
-@keyframes fly-in-left {
-    0% {}
+@keyframes slide-in-left {
+    0% {
+        transform: translateX(-400px);
+        opacity: 0;
+    }
 
     100% {
-        transform: translateX(0%);
+        transform: translateX(0);
+        opacity: 1;
     }
 }
 
 .fly-out-right {
-    animation-name: fly-out-right;
-    animation-duration: 150ms;
+    animation-name: slide-out-right;
+    animation-duration: 500ms;
+    animation-timing-function: ease-in;
     animation-fill-mode: forwards;
 }
 
-@keyframes fly-out-right {
+@keyframes slide-out-right {
     0% {
-        transform: translateX(0%);
+        transform: translateX(0);
+        opacity: 1;
     }
 
     100% {
-        transform: translateX(100%);
+        transform: translateX(400px);
+        opacity: 0;
     }
 }
 
@@ -137,4 +143,212 @@ body {
     background: lightblue;
     margin-bottom: 15px;
     border-radius: 15px;
+}
+
+/* Click Feedback Animations */
+#main-button {
+    cursor: pointer;
+    position: relative;
+    overflow: visible;
+}
+
+.click-ripple {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.6);
+    pointer-events: none;
+    animation: ripple-animation 400ms ease-out;
+}
+
+@keyframes ripple-animation {
+    0% {
+        transform: scale(0);
+        opacity: 1;
+    }
+
+    100% {
+        transform: scale(0.2);
+        opacity: 0;
+    }
+}
+
+.floating-number {
+    position: fixed;
+    font-size: 2rem;
+    font-weight: bold;
+    color: #4CAF50;
+    pointer-events: none;
+    animation: float-up 1s ease-out forwards;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    z-index: 1000;
+}
+
+@keyframes float-up {
+    0% {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateY(-100px) scale(1.5);
+        opacity: 0;
+    }
+}
+
+/* Achievement Notification */
+.achievement-notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    z-index: 2000;
+    animation: slide-in-right 500ms ease-out;
+    max-width: 300px;
+}
+
+.achievement-notification h3 {
+    margin: 0 0 5px 0;
+    font-size: 1.2rem;
+}
+
+.achievement-notification p {
+    margin: 0;
+    font-size: 0.9rem;
+    opacity: 0.9;
+}
+
+@keyframes slide-in-right {
+    0% {
+        transform: translateX(400px);
+        opacity: 0;
+    }
+
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+/* Click Storm */
+.storm-button {
+    position: fixed;
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    font-weight: bold;
+    font-size: 1rem;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    animation: storm-appear 300ms ease-out, storm-blink 3s linear;
+    z-index: 500;
+}
+
+.storm-button:hover {
+    transform: scale(1.1);
+}
+
+@keyframes storm-appear {
+    0% {
+        transform: scale(0);
+        opacity: 0;
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+@keyframes storm-blink {
+    0%, 50% {
+        opacity: 1;
+    }
+
+    /* Start blinking at 50% (1.5s) */
+    52.5% {
+        opacity: 0.3;
+    }
+    55% {
+        opacity: 1;
+    }
+    57% {
+        opacity: 0.3;
+    }
+    59% {
+        opacity: 1;
+    }
+    60.5% {
+        opacity: 0.3;
+    }
+    62% {
+        opacity: 1;
+    }
+    63% {
+        opacity: 0.3;
+    }
+    64% {
+        opacity: 1;
+    }
+    64.8% {
+        opacity: 0.3;
+    }
+    65.6% {
+        opacity: 1;
+    }
+    66.2% {
+        opacity: 0.3;
+    }
+    66.8% {
+        opacity: 1;
+    }
+    67.3% {
+        opacity: 0.3;
+    }
+    67.8% {
+        opacity: 1;
+    }
+    68.2% {
+        opacity: 0.3;
+    }
+    68.6% {
+        opacity: 1;
+    }
+    68.9% {
+        opacity: 0.3;
+    }
+    69.2% {
+        opacity: 1;
+    }
+    69.5% {
+        opacity: 0.3;
+    }
+    69.8% {
+        opacity: 1;
+    }
+    70% {
+        opacity: 0.3;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
+/* Counter Animation */
+@keyframes count-up {
+    0% {
+        transform: scale(1.2);
+        color: #4CAF50;
+    }
+
+    100% {
+        transform: scale(1);
+        color: inherit;
+    }
 }

@@ -39,12 +39,6 @@
 
 
 
-#reset-button {
-    grid-row: 3;
-    grid-column: 3;
-    align-self: center;
-}
-
 #companions-button {
     grid-column: 1;
 }
